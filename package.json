@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "description": "Web browsing plugin for GUI Chat applications",
-  "author": "snakajima",
+  "author": "receptron",
   "license": "MIT",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
