@@ -1,6 +1,6 @@
 {
   "name": "@gui-chat-plugin/browse",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "type": "module",
   "description": "Web browsing plugin for GUI Chat applications",
   "author": "receptron",
@@ -31,7 +31,7 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "gui-chat-protocol": "^0.0.4"
+    "gui-chat-protocol": "^0.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
