@@ -14,8 +14,11 @@ Web browsing plugin for GUI Chat applications. Browse and extract content from w
 ## Installation
 
 ```bash
-yarn add @gui-chat-plugin/browse
+yarn add @gui-chat-plugin/browse gui-chat-protocol
 ```
+
+> `gui-chat-protocol` is a peer dependency — install it alongside the plugin; the host application provides the runtime and this plugin only declares the compatible range.
+
 
 ## Usage
 
