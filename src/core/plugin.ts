@@ -20,20 +20,23 @@ function isTwitterUrl(url: string): boolean {
 
 async function handleTwitterEmbed(
   url: string,
-  context: ToolContext,
+  context: ToolContext | null | undefined,
 ): Promise<void> {
   if (!isTwitterUrl(url) || url in twitterEmbedData) {
     return;
   }
 
-  const embedHtml = await context.app?.getTwitterEmbed?.(url);
+  const embedHtml = await context?.app?.getTwitterEmbed?.(url);
   if (embedHtml) {
     twitterEmbedData[url] = embedHtml;
   }
 }
 
+// context is nullable on purpose: hosts that run the plugin without client-side
+// state (MulmoClaude's server bridge) pass an empty or missing context, and
+// reading through it unguarded threw a TypeError instead of returning a result.
 export const browse = async (
-  context: ToolContext,
+  context: ToolContext | null | undefined,
   args: BrowseArgs,
 ): Promise<BrowseResult> => {
   const { url } = args;
@@ -43,7 +46,7 @@ export const browse = async (
     await handleTwitterEmbed(url, context);
   }
 
-  if (!context.app?.browseUrl) {
+  if (!context?.app?.browseUrl) {
     return {
       message: "browseUrl function not available",
       instructions: "Acknowledge that the webpage browsing failed.",
