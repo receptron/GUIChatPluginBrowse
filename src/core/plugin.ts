@@ -1,8 +1,9 @@
 import type { ToolContext, ToolPluginCore } from "gui-chat-protocol";
 import type { BrowseToolData, BrowseJsonData, BrowseArgs, BrowseResult } from "./types";
+import { isBrowseUrlResponse } from "./hostResponse";
 import { TOOL_NAME, TOOL_DEFINITION } from "./definition";
 
-const twitterEmbedData: { [key: string]: string } = {};
+const twitterEmbedData: Record<string, string> = {};
 
 function isTwitterUrl(url: string): boolean {
   try {
@@ -27,7 +28,7 @@ async function handleTwitterEmbed(
   }
 
   const embedHtml = await context?.app?.getTwitterEmbed?.(url);
-  if (embedHtml) {
+  if (typeof embedHtml === "string" && embedHtml) {
     twitterEmbedData[url] = embedHtml;
   }
 }
@@ -55,6 +56,13 @@ export const browse = async (
 
   try {
     const data = await context.app.browseUrl(url);
+
+    if (!isBrowseUrlResponse(data)) {
+      return {
+        message: "browseUrl returned an unrecognized response",
+        instructions: "Acknowledge that the webpage browsing failed.",
+      };
+    }
 
     if (data.success && data.data) {
       const browseData: BrowseToolData = {
