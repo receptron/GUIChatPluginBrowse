@@ -1,6 +1,7 @@
 # @gui-chat-plugin/browse
 
 [![npm version](https://badge.fury.io/js/%40gui-chat-plugin%2Fbrowse.svg)](https://www.npmjs.com/package/@gui-chat-plugin/browse)
+[![scoria](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/receptron/GUIChatPluginBrowse/badges/scoria.json)](https://github.com/receptron/GUIChatPluginBrowse/actions/workflows/scoria.yml)
 
 Web browsing plugin for GUI Chat applications. Browse and extract content from web pages.
 
