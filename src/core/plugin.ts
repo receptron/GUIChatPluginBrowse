@@ -8,21 +8,13 @@ const twitterEmbedData: Record<string, string> = {};
 function isTwitterUrl(url: string): boolean {
   try {
     const urlObj = new URL(url);
-    return (
-      urlObj.hostname === "twitter.com" ||
-      urlObj.hostname === "www.twitter.com" ||
-      urlObj.hostname === "x.com" ||
-      urlObj.hostname === "www.x.com"
-    );
+    return urlObj.hostname === "twitter.com" || urlObj.hostname === "www.twitter.com" || urlObj.hostname === "x.com" || urlObj.hostname === "www.x.com";
   } catch {
     return false;
   }
 }
 
-async function handleTwitterEmbed(
-  url: string,
-  context: ToolContext | null | undefined,
-): Promise<void> {
+async function handleTwitterEmbed(url: string, context: ToolContext | null | undefined): Promise<void> {
   if (!isTwitterUrl(url) || url in twitterEmbedData) {
     return;
   }
@@ -36,10 +28,7 @@ async function handleTwitterEmbed(
 // context is nullable on purpose: hosts that run the plugin without client-side
 // state (MulmoClaude's server bridge) pass an empty or missing context, and
 // reading through it unguarded threw a TypeError instead of returning a result.
-export const browse = async (
-  context: ToolContext | null | undefined,
-  args: BrowseArgs,
-): Promise<BrowseResult> => {
+export const browse = async (context: ToolContext | null | undefined, args: BrowseArgs): Promise<BrowseResult> => {
   const { url } = args;
 
   // Handle Twitter embeds
@@ -67,17 +56,14 @@ export const browse = async (
     if (data.success && data.data) {
       const browseData: BrowseToolData = {
         url,
-        twitterEmbedHtml: isTwitterUrl(url)
-          ? twitterEmbedData[url] || null
-          : undefined,
+        twitterEmbedHtml: isTwitterUrl(url) ? twitterEmbedData[url] || null : undefined,
       };
 
       return {
         message: "Successfully browsed the webpage",
         title: data.data.title || "Untitled",
         jsonData: { data: data.data },
-        instructions:
-          "Acknowledge that the webpage was successfully browsed and give a ONE-SENTENCE summary of the content if it is available.",
+        instructions: "Acknowledge that the webpage was successfully browsed and give a ONE-SENTENCE summary of the content if it is available.",
         data: browseData,
       };
     } else {
