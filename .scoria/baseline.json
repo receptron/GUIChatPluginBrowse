@@ -1,7 +1,7 @@
 {
   "report": {
     "schemaVersion": 1,
-    "root": "/private/tmp/claude-501/-Users-isamu-ss-llm-lab/05aa564a-1040-4f30-b316-122f241bad1d/scratchpad/repos/browse",
+    "root": ".",
     "label": "@gui-chat-plugin/browse",
     "profile": "library",
     "stacks": [
@@ -874,5 +874,5 @@
       "comparable": false
     }
   },
-  "createdAt": "2026-10-18T03:03:52.050Z"
+  "createdAt": "2026-10-18T03:43:16.886Z"
 }
